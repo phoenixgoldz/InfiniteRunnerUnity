@@ -1,6 +1,8 @@
-﻿/// <summary>
-/// Our game state enum
-/// </summary>
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
+
 public enum GameState
 {
     Start,
