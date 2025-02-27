@@ -1,0 +1,86 @@
+# Unity generated files
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+MemoryCaptures/
+
+# Visual Studio / Rider / JetBrains files
+.vs/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.cache
+*.user
+*.unityproj
+*.booproj
+*.pidb
+*.sdf
+*.sqlite
+*.tlog
+*.VC.db
+
+# Cache and imported assets
+/Assets/Plugins/Editor/JetBrains*
+/Assets/Plugins/Editor/JetBrains*
+/Assets/StreamingAssets/*
+/Assets/AddressableAssetsData/*
+/Assets/AssetBundles/*
+/Assets/Resources/UntrackedAssets/*
+/Assets/Scripts/Generated/*
+/Assets/Scenes/AutoSave_*
+
+# Unity 6 specific cache
+/Library/ShaderCache.db
+/Library/ShaderCache.data
+/Library/PackageManager/ProjectCache/
+/Library/PackageManager/State/
+
+/ProjectSettings/EditorBuildSettings.asset
+/ProjectSettings/TimeManager.asset
+
+# Generated folders
+/Logs/
+# Uncomment the next line if using PlasticSCM
+# /.plastic/
+
+# Unity Cloud Build
+/[Cc]loud/
+*[Cc]loudBuild/
+
+# Unity Smart Merge
+*.merges
+
+# Ignore crash reports
+*.crash
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore Rider workspace files
+*.iml
+*.ipr
+*.iws
+
+# Ignore Playmode test results
+/Assets/Tests/PlaymodeTests/PlaymodeTestResults/
+
+# Ignore Addressables Build Data
+/Assets/AddressableAssetsData/*.bin
+/Assets/AddressableAssetsData/*.hash
+/Assets/AddressableAssetsData/*.json
+
+# Logs and backups
+/Logs/
+/*.bak
+*.log
+*.log.*
+
+# Prevent Unity Collaborate from adding unnecessary files
+UnityCollaborateIgnore.txt
