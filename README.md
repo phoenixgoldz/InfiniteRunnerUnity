@@ -21,8 +21,6 @@
 - Set up **Unity Engine 6** environment.  
 - Integrated **stylized assets** for visuals.  
 
-![Frostpaw Dash](./InfiniteRunner3D/Assets/Images/MenuImage.png)  
-
 ## **Assets Used**  
 - 🎨 [50 Free Stylized Materials](https://assetstore.unity.com/packages/2d/textures-materials/50-free-stylized-materials-242764) – Stylized textures  
 - ☁️ [Free Stylized Skybox](https://assetstore.unity.com/packages/2d/textures-materials/sky/free-stylized-skybox-212257) – Skybox for background  
