@@ -1,6 +1,6 @@
 # **Frostpaw Dash**  
 
-![Frostpaw Dash](./assets/frostpaw_dash.jpeg)  
+![Frostpaw Dash](./tmp_ab59516b-cb1f-4690-8b83-b9867a2296f0.jpeg)  
 
 ## **Overview**  
 **Frostpaw Dash** is an endless runner 3D game inspired by *Temple Run*, developed in **Unity Engine 6**. Players take control of a **chibi white leopard**, dashing through a stylized fantasy world filled with obstacles, power-ups, and high-speed challenges. The game features vibrant environments, smooth controls, and an immersive experience designed for endless fun.  
