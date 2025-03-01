@@ -28,7 +28,7 @@
 - Include **sound effects & background music**.  
 - Polish visuals & optimize performance.  
 
-![Frostpaw Dash](/InfiniteRunner3D/Assets/Images/MenuImage.png)
+![Frostpaw Dash](InfiniteRunner3D/Assets/Images/MenuImage.png)
 
 ## **Assets Used**  
 - 🌲 [Anime Natural Environment](https://assetstore.unity.com/packages/3d/environments/fantasy/anime-natural-environment-236927) – Fantasy environment  
