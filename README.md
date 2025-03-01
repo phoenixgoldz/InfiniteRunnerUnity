@@ -21,33 +21,24 @@
 - Set up **Unity Engine 6** environment.  
 - Integrated **stylized assets** for visuals.  
 
-### 🚧 **To-Do (Before March 10th Deadline)**  
-- **Rig & animate** the character model.  
-- Implement **procedural level generation**.  
-- Add **UI elements** (score, power-ups, pause menu).  
-- Include **sound effects & background music**.  
-- Polish visuals & optimize performance.  
-
-![Frostpaw Dash](InfiniteRunner3D/Assets/Images/MenuImage.png)
+![Frostpaw Dash](InfiniteRunner3D/Assets/Images/MenuImage.png)  
 
 ## **Assets Used**  
-- 🌲 [Anime Natural Environment](https://assetstore.unity.com/packages/3d/environments/fantasy/anime-natural-environment-236927) – Fantasy environment  
 - 🎨 [50 Free Stylized Materials](https://assetstore.unity.com/packages/2d/textures-materials/50-free-stylized-materials-242764) – Stylized textures  
 - ☁️ [Free Stylized Skybox](https://assetstore.unity.com/packages/2d/textures-materials/sky/free-stylized-skybox-212257) – Skybox for background  
 
 ## **Tech Stack**  
 - 🛠 **Engine**: Unity Engine 6  
 - 💻 **Language**: C#  
-- 📱 **Platform**: PC & Android (TBD)  
+- 📱 **Platform**: PC & Android  
 
 ## **How to Run the Game**  
 1. Clone the repository:  
    ```sh
    git clone https://github.com/your-username/your-repo.git
-  
+   ```
+2. Open the project in Unity Engine 6.  
 3. Click **Play** to test the game.  
 
 ## **License**  
 MIT License  
-
-
