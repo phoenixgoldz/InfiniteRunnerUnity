@@ -72,3 +72,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/InfiniteRunner3D/Library
+/InfiniteRunner3D/Logs
+/InfiniteRunner3D/Library
+/InfiniteRunner3D/Temp
+*.dwlt
+/InfiniteRunner3D/Temp
