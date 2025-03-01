@@ -79,3 +79,4 @@ crashlytics-build.properties
 *.dwlt
 /InfiniteRunner3D/Temp
 InfiniteRunner3D/Temp/UnityLockfile
+*.meta
