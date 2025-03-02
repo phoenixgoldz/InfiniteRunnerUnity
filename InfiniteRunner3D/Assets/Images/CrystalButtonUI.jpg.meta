@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,13 +37,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -134,12 +134,188 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: CrystalButtonUI_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 338
+        width: 133
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf62932ca2c82d24e8d68d1089e7208a
+      internalID: 1390637112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrystalButtonUI_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 339
+        width: 129
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 449c5ec72b16512468ed396cabb5a713
+      internalID: -1442565806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrystalButtonUI_6
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 346
+        width: 111
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd77ba43deff6eb44a2471d366c04cfb
+      internalID: -495316730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrystalButtonUI_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 254
+        width: 192
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f98b1cb50c5731d4281ad1b93a9e6714
+      internalID: -480317038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrystalButtonUI_9
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 250
+        width: 296
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce842b4250b3090408d27031b26c11e4
+      internalID: 58537674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrystalButtonUI_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 185
+        width: 193
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ea1f5c6e742f4a4b8efaf139689943b
+      internalID: -1010951023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrystalButtonUI_11
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 184
+        width: 195
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cae0e9f5690633e4dbf85d37523c0c7c
+      internalID: 1827196854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CrystalButtonUI_17
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 109
+        width: 54
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73df19b65725be245901f5c4a8948021
+      internalID: 80767005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ba5a0acdc2a6df0479633d5faf4f5fa2
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +324,28 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CrystalButtonUI_0: -149705357
+      CrystalButtonUI_1: 1390637112
+      CrystalButtonUI_10: -1010951023
+      CrystalButtonUI_11: 1827196854
+      CrystalButtonUI_12: -211799031
+      CrystalButtonUI_13: 148923391
+      CrystalButtonUI_14: 1710559712
+      CrystalButtonUI_15: 1751447817
+      CrystalButtonUI_16: 265623216
+      CrystalButtonUI_17: 80767005
+      CrystalButtonUI_18: -164500875
+      CrystalButtonUI_19: 986417339
+      CrystalButtonUI_2: -1442565806
+      CrystalButtonUI_20: 1695214538
+      CrystalButtonUI_3: -1491394357
+      CrystalButtonUI_4: -2107719439
+      CrystalButtonUI_5: -509517209
+      CrystalButtonUI_6: -495316730
+      CrystalButtonUI_7: 2006820458
+      CrystalButtonUI_8: -480317038
+      CrystalButtonUI_9: 58537674
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
