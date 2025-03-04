@@ -80,3 +80,5 @@ crashlytics-build.properties
 /InfiniteRunner3D/Temp
 InfiniteRunner3D/Temp/UnityLockfile
 *.meta
+/InfiniteRunner3D/UserSettings/Layouts
+/InfiniteRunner3D/Library
