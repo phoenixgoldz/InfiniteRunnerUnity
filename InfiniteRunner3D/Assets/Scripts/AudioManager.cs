@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("UI Elements")]
     public Slider masterVolumeSlider; // Reference to the volume slider
+    public Toggle musicToggle; // Toggle for enabling/disabling music
+    public Toggle vibrationToggle; // Toggle for enabling/disabling vibration
 
     void Awake()
     {
@@ -37,16 +39,32 @@ public class AudioManager : MonoBehaviour
         float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f); // Default to 50% if not set
         SetVolume(savedVolume);
 
+        bool isMusicEnabled = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
+        musicToggle.isOn = isMusicEnabled;
+        ToggleMusic(isMusicEnabled);
+
+        bool isVibrationEnabled = PlayerPrefs.GetInt("VibrationEnabled", 1) == 1;
+        vibrationToggle.isOn = isVibrationEnabled;
+
         PlayMusicForScene(SceneManager.GetActiveScene().name);
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         ApplyButtonClickSound();
 
-        // 🔥 Attach the real-time listener to the volume slider
         if (masterVolumeSlider != null)
         {
             masterVolumeSlider.value = savedVolume;
             masterVolumeSlider.onValueChanged.AddListener(SetVolume);
+        }
+
+        if (musicToggle != null)
+        {
+            musicToggle.onValueChanged.AddListener(ToggleMusic);
+        }
+
+        if (vibrationToggle != null)
+        {
+            vibrationToggle.onValueChanged.AddListener(ToggleVibration);
         }
     }
 
@@ -55,7 +73,6 @@ public class AudioManager : MonoBehaviour
         PlayMusicForScene(scene.name);
         ApplyButtonClickSound();
 
-        // 🔄 Ensure the volume slider still controls the volume in a new scene
         if (masterVolumeSlider != null)
         {
             masterVolumeSlider.onValueChanged.AddListener(SetVolume);
@@ -114,7 +131,20 @@ public class AudioManager : MonoBehaviour
 
     public float GetVolume()
     {
-        return PlayerPrefs.GetFloat("MusicVolume", 0.5f); // Ensure it starts at 50%
+        return PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+    }
+
+    public void ToggleMusic(bool isEnabled)
+    {
+        musicSource.mute = !isEnabled;
+        PlayerPrefs.SetInt("MusicEnabled", isEnabled ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void ToggleVibration(bool isEnabled)
+    {
+        PlayerPrefs.SetInt("VibrationEnabled", isEnabled ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     void ApplyButtonClickSound()
