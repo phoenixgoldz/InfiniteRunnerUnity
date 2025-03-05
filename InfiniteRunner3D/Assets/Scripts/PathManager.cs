@@ -4,15 +4,15 @@ using System.Collections.Generic;
 public class PathManager : MonoBehaviour
 {
     [Header("Path Settings")]
-    public GameObject[] pathPrefabs; // Paths (FlatIcePath, etc.)
-    public int initialSegments = 5;  // How many segments spawn at start
-    public float pathLength = 300f;  // Fixed distance between paths
-    public float pathYPosition = -3.2f; // Ensuring paths spawn at this height
+    public GameObject[] pathPrefabs;
+    public int initialSegments = 5;
+    public float pathLength = 300f;
+    public float pathYPosition = -3.2f;
 
     [Header("Side Decorations")]
-    public GameObject[] leftSidePrefabs;  // Assign Crystal Wall prefabs here
-    public GameObject[] rightSidePrefabs; // Assign BlueCrystals prefabs here
-    public float sideOffset = 150f; // Distance from center to the side
+    public GameObject[] leftSidePrefabs;
+    public GameObject[] rightSidePrefabs;
+    public float sideOffset = 150f;
 
     private Transform player;
     private List<GameObject> activePaths = new List<GameObject>();
@@ -29,7 +29,10 @@ public class PathManager : MonoBehaviour
             return;
         }
 
-        // Spawn initial paths
+        // Spawn initial floor segment (permanent)
+        SpawnInitialFloor();
+
+        // Spawn other initial paths
         for (int i = 0; i < initialSegments; i++)
         {
             SpawnPath(i == 0 ? 0 : Random.Range(0, pathPrefabs.Length));
@@ -48,25 +51,27 @@ public class PathManager : MonoBehaviour
         }
     }
 
+    void SpawnInitialFloor()
+    {
+        GameObject initialFloor = Instantiate(pathPrefabs[0], new Vector3(0, pathYPosition, spawnZ), Quaternion.identity);
+        activePaths.Add(initialFloor);
+    }
+
     public void SpawnPath(int prefabIndex)
     {
-        // Spawn main path segment at fixed y-position
-        GameObject newPath = Instantiate(pathPrefabs[prefabIndex], 
-            new Vector3(0, pathYPosition, spawnZ), Quaternion.identity);
+        GameObject newPath = Instantiate(pathPrefabs[prefabIndex], new Vector3(0, pathYPosition, spawnZ), Quaternion.identity);
         activePaths.Add(newPath);
 
-        // Spawn left decoration
         if (leftSidePrefabs.Length > 0)
         {
-            GameObject leftDeco = Instantiate(leftSidePrefabs[Random.Range(0, leftSidePrefabs.Length)], 
+            GameObject leftDeco = Instantiate(leftSidePrefabs[Random.Range(0, leftSidePrefabs.Length)],
                 new Vector3(-sideOffset, pathYPosition, spawnZ), Quaternion.identity);
             activePaths.Add(leftDeco);
         }
 
-        // Spawn right decoration
         if (rightSidePrefabs.Length > 0)
         {
-            GameObject rightDeco = Instantiate(rightSidePrefabs[Random.Range(0, rightSidePrefabs.Length)], 
+            GameObject rightDeco = Instantiate(rightSidePrefabs[Random.Range(0, rightSidePrefabs.Length)],
                 new Vector3(sideOffset, pathYPosition, spawnZ), Quaternion.identity);
             activePaths.Add(rightDeco);
         }
@@ -76,10 +81,11 @@ public class PathManager : MonoBehaviour
 
     void DeleteOldPath()
     {
-        if (activePaths.Count > initialSegments * 3) // *3 since each path has 2 decorations
+        // Prevent removing the first path segment
+        if (activePaths.Count > initialSegments * 3 + 1) // +1 to exclude the initial floor
         {
-            Destroy(activePaths[0]);
-            activePaths.RemoveAt(0);
+            Destroy(activePaths[1]); // Remove the oldest segment (but not the first)
+            activePaths.RemoveAt(1);
         }
     }
 }
