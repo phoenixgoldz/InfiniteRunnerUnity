@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4968252074532958253
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2832.48
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1300
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.22
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.49
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6771603
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.73583555
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 94.756
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_Name
+      value: Crystal Wall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      propertyPath: m_TagString
+      value: PathTrigger
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 437858197568358636}
+  m_SourcePrefab: {fileID: 100100000, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+--- !u!1 &5202694553985830268 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20ad955fb703af3448b0839226207c24, type: 3}
+  m_PrefabInstance: {fileID: 4968252074532958253}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &437858197568358636
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5202694553985830268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.013974689, y: 0.02001881, z: 0.007995239}
+  m_Center: {x: -0.0000026549678, y: -0.000022545457, z: -0.000017060198}

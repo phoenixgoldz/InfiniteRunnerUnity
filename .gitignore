@@ -73,12 +73,9 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /InfiniteRunner3D/Library
+/InfiniteRunner3D/Temp
 /InfiniteRunner3D/Logs
 /InfiniteRunner3D/Library
-/InfiniteRunner3D/Temp
-*.dwlt
-/InfiniteRunner3D/Temp
-InfiniteRunner3D/Temp/UnityLockfile
-*.meta
-/InfiniteRunner3D/UserSettings/Layouts
-/InfiniteRunner3D/Library
+/InfiniteRunner3D/Library/Bee
+InfiniteRunner3D/Library/ArtifactDB
+/InfiniteRunner3D/Library/Bee
