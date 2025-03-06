@@ -15,7 +15,7 @@
 - 🐆 **Chibi White Leopard Character** – Fully animated and rigged for fluid movement.  
 
 ## **🚀 Latest Updates**  
-✅ **Test Build Released:** Available as a **pre-release for Android** under [Releases](https://github.com/your-username/your-repo/releases).  
+✅ **Test Build Released:** Available as a **pre-release for Android** under [Releases](https://github.com/phoenixgoldz/FrostpawDash/releases).  
 ✅ **Crystal Caverns Level Touch-Up:** Improved obstacles, visuals, and environmental effects.  
 ✅ **Character Skeleton Implementation:** Setting up animations for the chibi leopard.  
 ✅ **Procedural Level Design:** Added prefabs for **walls, floors, and pathways** to generate random levels dynamically.  
@@ -25,26 +25,23 @@ Each environment introduces unique **obstacles and mechanics** while maintaining
 
 ### **🌟 Level 1: Crystal Caverns (Beginner-Friendly)**  
   
-- 🌌 **Obstacles:** Falling stalactites, shattering crystal bridges, and energy barriers.  
-- 🔹 **Mechanics:** Slow-moving hazards, simple jumps, and minimal speed increase.  
+- 🌌 **Obstacles:** Falling stalactites, crystal bridges, and icy platforms.  
+- 🔹 **Mechanics:** Slow-moving hazards, simple jumps, and minimal speed increase.
 
+## **Upcoming Possible Levels:**
 ### **🌀 Level 2: Celestial Ruins (Moderate Challenge)**  
-![Celestial Ruins] 
 - 🏛 **Obstacles:** Vanishing platforms, teleporting orbs, and floating guardian statues.  
 - ⚡ **Mechanics:** More complex movement with faster pace and strategic dodging.  
 
 ### **❄️ Level 3: Frozen Twilight Tundra (Challenging, but Fair)**  
-![Frozen Twilight Tundra] 
 - 🌨 **Obstacles:** Slippery ice patches, crumbling bridges, and frozen wolves dashing across the path.  
 - 🏂 **Mechanics:** Ice physics affecting movement, forcing precise reactions.  
 
 ### **🌙 Level 4: Enchanted Moonlit Forest (More Advanced)**  
-![Enchanted Moonlit Forest] 
 - 🌲 **Obstacles:** Moving tree roots, glowing lantern spirits, and swinging vines blocking paths.  
 - 🍄 **Mechanics:** Bouncing mushrooms add verticality, requiring better control.  
 
 ### **🏙️ Level 5: Arcane Cityscape (Fast-Paced, High Skill)**  
-![Arcane Cityscape]
 - ✨ **Obstacles:** Gravity shifts, rotating magic gears, and energy surges blocking paths.  
 - ⚙️ **Mechanics:** Running on walls temporarily, requiring fast adaptation.  
 
@@ -58,8 +55,7 @@ Each environment introduces unique **obstacles and mechanics** while maintaining
 - **Stylized assets integrated**  
 
 ## **Assets Used**  
-- 🎨 [50 Free Stylized Materials](https://assetstore.unity.com/packages/2d/textures-materials/50-free-stylized-materials-242764) – Stylized textures  
-- ☁️ [Free Stylized Skybox](https://assetstore.unity.com/packages/2d/textures-materials/sky/free-stylized-skybox-212257) – Skybox for background  
+- ☁️ [Free Stylized Skybox](https://assetstore.unity.com/packages/2d/textures-materials/sky/free-stylized-skybox-212257) – Skybox for backgrounds
 
 ## **Tech Stack**  
 - 🛠 **Engine**: Unity Engine 6  
