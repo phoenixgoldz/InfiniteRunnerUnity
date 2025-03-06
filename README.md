@@ -24,27 +24,27 @@
 Each environment introduces unique **obstacles and mechanics** while maintaining balanced gameplay:  
 
 ### **🌟 Level 1: Crystal Caverns (Beginner-Friendly)**  
-![Crystal Caverns](./images/crystal_caverns.png)  
+  
 - 🌌 **Obstacles:** Falling stalactites, shattering crystal bridges, and energy barriers.  
 - 🔹 **Mechanics:** Slow-moving hazards, simple jumps, and minimal speed increase.  
 
 ### **🌀 Level 2: Celestial Ruins (Moderate Challenge)**  
-![Celestial Ruins](./images/celestial_ruins.png)  
+![Celestial Ruins] 
 - 🏛 **Obstacles:** Vanishing platforms, teleporting orbs, and floating guardian statues.  
 - ⚡ **Mechanics:** More complex movement with faster pace and strategic dodging.  
 
 ### **❄️ Level 3: Frozen Twilight Tundra (Challenging, but Fair)**  
-![Frozen Twilight Tundra](./images/frozen_twilight_tundra.png)  
+![Frozen Twilight Tundra] 
 - 🌨 **Obstacles:** Slippery ice patches, crumbling bridges, and frozen wolves dashing across the path.  
 - 🏂 **Mechanics:** Ice physics affecting movement, forcing precise reactions.  
 
 ### **🌙 Level 4: Enchanted Moonlit Forest (More Advanced)**  
-![Enchanted Moonlit Forest](./images/moonlit_forest.png)  
+![Enchanted Moonlit Forest] 
 - 🌲 **Obstacles:** Moving tree roots, glowing lantern spirits, and swinging vines blocking paths.  
 - 🍄 **Mechanics:** Bouncing mushrooms add verticality, requiring better control.  
 
 ### **🏙️ Level 5: Arcane Cityscape (Fast-Paced, High Skill)**  
-![Arcane Cityscape](./images/arcane_cityscape.png)  
+![Arcane Cityscape]
 - ✨ **Obstacles:** Gravity shifts, rotating magic gears, and energy surges blocking paths.  
 - ⚙️ **Mechanics:** Running on walls temporarily, requiring fast adaptation.  
 
