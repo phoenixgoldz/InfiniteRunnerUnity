@@ -18,7 +18,21 @@ public class PlayerUIManager : MonoBehaviour
     private bool isPaused = false;
     private AudioSource backgroundMusic;
     private GameObject player;
-    private CharacterController characterController; // Using Unity's CharacterController
+    private CharacterController characterController;
+
+    public static PlayerUIManager Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -28,9 +42,8 @@ public class PlayerUIManager : MonoBehaviour
         resumeButton.onClick.AddListener(TogglePauseMenu);
         quitButton.onClick.AddListener(QuitGame);
 
-        // Find background music in the scene
         backgroundMusic = Object.FindFirstObjectByType<AudioSource>();
-        player = GameObject.FindGameObjectWithTag("Player"); // Ensure player has "Player" tag
+        player = GameObject.FindGameObjectWithTag("Player");
 
         if (player != null)
         {
@@ -42,9 +55,19 @@ public class PlayerUIManager : MonoBehaviour
     {
         if (!isPaused && characterController != null && characterController.velocity.magnitude > 0.1f)
         {
-            distanceTraveled += Time.deltaTime * characterController.velocity.magnitude; // Distance based on movement
+            distanceTraveled += Time.deltaTime * characterController.velocity.magnitude;
             UpdateDistance(distanceTraveled);
         }
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public float GetDistance()
+    {
+        return distanceTraveled;
     }
 
     public void UpdateScore(int amount)

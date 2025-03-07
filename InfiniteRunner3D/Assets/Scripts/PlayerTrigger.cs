@@ -6,14 +6,14 @@ public class PlayerTrigger : MonoBehaviour
 
     void Start()
     {
-        pathManager = FindObjectOfType<PathManager>();
+        pathManager = FindFirstObjectByType<PathManager>(); 
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PathTrigger"))
         {
-            pathManager.SpawnPath(Random.Range(0, pathManager.pathPrefabs.Length));
+            pathManager.SpawnPath(); 
         }
     }
 }

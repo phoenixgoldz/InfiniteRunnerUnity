@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - PathTrigger
+  - Wall
+  - Obstacle
+  - Roof
   layers:
   - Default
   - TransparentFX
