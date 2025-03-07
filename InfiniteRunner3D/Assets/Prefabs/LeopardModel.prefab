@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6753211814940613444}
   - component: {fileID: 1523434879630525766}
   - component: {fileID: 5961741414965133018}
-  - component: {fileID: 4969954057335004657}
+  - component: {fileID: 5774830828021770632}
+  - component: {fileID: 3116078460435565867}
   m_Layer: 0
   m_Name: LeopardModel
   m_TagString: Player
@@ -85,7 +86,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 1
 --- !u!143 &5961741414965133018
 CharacterController:
@@ -112,7 +113,30 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4969954057335004657
+--- !u!136 &5774830828021770632
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5565889009949572}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &3116078460435565867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,9 +145,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5565889009949572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 754c8b283d5bbc94d9d5153ab8811fbd, type: 3}
+  m_Script: {fileID: 11500000, guid: 9be3ccb26cbbb0d41bafaec4537a2822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
+  turnSpeed: 5
+  jumpForce: 10
+  laneDistance: 3
 --- !u!1 &25526494602306381
 GameObject:
   m_ObjectHideFlags: 0

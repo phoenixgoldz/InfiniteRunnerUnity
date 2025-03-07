@@ -40,25 +40,20 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        if (!isMoving) return; //  Stops movement until player touches the floor
-
-        Rigidbody rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
             Debug.LogError("❌ Rigidbody not found on player!");
             return;
         }
 
-        rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, speed); //  Force movement forward
+        rb.AddRelativeForce(Vector3.forward * speed - rb.linearVelocity);  // Thank you https://discussions.unity.com/t/moving-a-rigidbody-at-a-constant-speed/435417/9
 
-        Debug.Log($" Moving Forward: {rb.linearVelocity.z}");
+        // Debug.Log($" Moving Forward: {rb.linearVelocity.z}");
     }
 
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"▶️ Player touched: {other.gameObject.name} | Tag: {other.tag}"); // Debug log
-
         if (other.CompareTag("PathTrigger"))
         {
             isMoving = true;
@@ -68,6 +63,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("❌ Hit an Obstacle!");
             Die();
+        }
+        else
+        {
+            Debug.Log($"▶️ Player touched: {other.gameObject.name} | Tag: {other.tag}"); // Debug log
         }
     }
 
