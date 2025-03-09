@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
     private InputAction laneShiftAction;
 
     // Touch Controls
-    // 
+    private InputAction tiltAction;
+    [SerializeField] private float currentTilt => tiltAction.ReadValue<float>();
 
 
     void Start()
@@ -46,19 +47,37 @@ public class PlayerController : MonoBehaviour
 
         lanePosition = transform.position;
 
+        #if UNITY_ANDROID || UNITY_IOS
+        AddMobileControls();
+        #else
         CreateKeyboardControls();
+        #endif
 
         playerControls.Enable();
     }
 
-    private void OnDestroy() { playerControls.Disable(); }
+    void OnDestroy()
+    {
+        #if UNITY_ANDROID || UNITY_IOS
+        SwipeDetection.instance.swipePerformed -= context => HandleSwipe(context);
+        #endif
+
+        playerControls.Disable();
+    }
 
     void FixedUpdate() //  Use FixedUpdate for physics-based movement
     {
         // (justTurned) justTurned = false;
 
-        // Move Player forward
-        if (isMoving) MovePlayer();
+        if (isMoving)
+        {
+            #if UNITY_ANDROID || UNITY_IOS
+            DetectTilt();
+            #endif
+
+            // Move Player forward
+            MovePlayer();
+        }
 
         // Check if Player falls off
         if (transform.position.y < -5f) Die();
@@ -102,6 +121,25 @@ public class PlayerController : MonoBehaviour
         laneShiftAction.performed += context => ChangeLane(context.ReadValue<float>());
     }
 
+    private void AddMobileControls()
+    {
+        SwipeDetection.instance.swipePerformed += context => HandleSwipe(context);
+
+        // Enable Gyro Sensors
+        // Thank you https://discussions.unity.com/t/tutorial-for-input-system-and-accelerometer-gyro/790202/2, extremely appreciated
+        if (UnityEngine.InputSystem.Gyroscope.current != null) InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
+
+        tiltAction = playerControls.AddAction("Move", binding: "<Gyroscope>/angularVelocity/y");
+    }
+
+    void HandleSwipe(Vector2 swipeDirection)
+    {
+        print("Screen Swiped");
+
+        if (swipeDirection.y == 1) Jump();
+        else if (swipeDirection.y == -1) Slide();
+    }
+
     void MovePlayer()
     {
         if (rb == null)
@@ -119,53 +157,10 @@ public class PlayerController : MonoBehaviour
         rb.Move(lanePosition, Quaternion.identity);
     }
 
-    void HandleInput()
-    {
-// #if UNITY_ANDROID
-//         DetectSwipe();
-//         DetectTilt();
-// #else
-//         DetectKeyboardInput();
-// #endif
-    }
-
-    void DetectSwipe()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            //if (touch.phase == TouchPhase.Began)
-            //{
-            //    startTouchPosition = touch.position;
-            //}
-            //else if (touch.phase == TouchPhase.Ended)
-            //{
-            //    swipeDelta = touch.position - startTouchPosition;
-
-            //    if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
-            //    {
-            //        if (swipeDelta.x > 100) ChangeLane(1);
-            //        else if (swipeDelta.x < -100) ChangeLane(-1);
-            //    }
-            //    else
-            //    {
-            //        if (swipeDelta.y > 100) Jump();
-            //        else if (swipeDelta.y < -100) Slide();
-            //    }
-            //}
-        }
-    }
-
     void DetectTilt()
     {
-        if (SystemInfo.supportsGyroscope)
-        {
-            float tilt = Input.acceleration.x;
-
-            if (tilt > 0.2f && currentLane < 1) ChangeLane(1);
-            else if (tilt < -0.2f && currentLane > -1) ChangeLane(-1);
-        }
+        if (currentTilt > 0.2f) ChangeLane(1);
+        if (currentTilt < -0.2f) ChangeLane(-1);
     }
 
     void Jump()

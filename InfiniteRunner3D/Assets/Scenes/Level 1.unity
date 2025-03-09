@@ -1822,6 +1822,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519465458}
   m_CullTransparentMesh: 1
+--- !u!1 &1653155100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1653155102}
+  - component: {fileID: 1653155101}
+  m_Layer: 0
+  m_Name: SwipeDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1653155101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653155100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce82876947755fd4ab96566a1364d120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touchPosition:
+    m_Name: Touch Position
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: f6267e8d-ea97-428a-85ec-87c00bd243ab
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 2d26f3c0-a064-444f-891f-2920760d2ab0
+      m_Path: <Touchscreen>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Position
+      m_Flags: 0
+    m_Flags: 0
+  touchPress:
+    m_Name: Touch Press
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 3da27d35-7803-4df4-b48f-8a3a3d6e350d
+    m_Processors: 
+    m_Interactions: Press
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: bdf3eaef-c23d-492f-80c2-dcda1a28936a
+      m_Path: <Touchscreen>/Press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Press
+      m_Flags: 0
+    m_Flags: 0
+  swipeResistance: 100
+  initialTouchPos: {x: 0, y: 0}
+--- !u!4 &1653155102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653155100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1711163051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,22 +2090,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1523434879630525766, guid: f423bae82fb1dc148ba19d85714b0555, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 3116078460435565867, guid: f423bae82fb1dc148ba19d85714b0555, type: 3}
-      propertyPath: speed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3116078460435565867, guid: f423bae82fb1dc148ba19d85714b0555, type: 3}
-      propertyPath: jumpForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6753211814940613444, guid: f423bae82fb1dc148ba19d85714b0555, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2035,6 +2099,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1653155102}
   - {fileID: 991053585}
   - {fileID: 1344823129}
   - {fileID: 818233988}
