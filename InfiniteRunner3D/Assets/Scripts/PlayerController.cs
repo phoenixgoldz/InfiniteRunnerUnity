@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     // Touch Controls
     private InputAction tiltAction;
-    [SerializeField] private float currentTilt => tiltAction.ReadValue<float>();
+    private float currentTilt => tiltAction.ReadValue<float>();
 
 
     void Start()
@@ -140,6 +140,14 @@ public class PlayerController : MonoBehaviour
         else if (swipeDirection.y == -1) Slide();
     }
 
+    void DetectTilt()
+    {
+        if (currentTilt != 0) print(currentTilt);
+
+        if (currentTilt > 0.2f) ChangeLane(1);
+        if (currentTilt < -0.2f) ChangeLane(-1);
+    }
+
     void MovePlayer()
     {
         if (rb == null)
@@ -155,12 +163,6 @@ public class PlayerController : MonoBehaviour
         lanePosition.z = transform.position.z;
 
         rb.Move(lanePosition, Quaternion.identity);
-    }
-
-    void DetectTilt()
-    {
-        if (currentTilt > 0.2f) ChangeLane(1);
-        if (currentTilt < -0.2f) ChangeLane(-1);
     }
 
     void Jump()
