@@ -7,15 +7,44 @@ using System.Collections;
 public class SplashScreenManager : MonoBehaviour
 {
     private VideoPlayer videoPlayer;
-    public CanvasGroup fadeCanvasGroup; // Reference to Canvas Group for fade effect
-    public float fadeDuration = 1.5f; // Duration of fade-in/out
+    private AudioSource audioSource; // Reference to the Audio Source
+    public RawImage videoDisplay;
+    public RenderTexture renderTexture;
+    public CanvasGroup fadeCanvasGroup;
+    public float fadeDuration = 1.5f;
 
     void Start()
     {
         videoPlayer = GetComponent<VideoPlayer>();
-        videoPlayer.loopPointReached += OnVideoFinished; // Event when video ends
+        audioSource = GetComponent<AudioSource>(); // Get Audio Source
 
-        // Start Fade-In Effect
+        if (renderTexture != null)
+        {
+            renderTexture.Release();
+            videoPlayer.targetTexture = renderTexture;
+        }
+
+        if (videoDisplay != null)
+        {
+            videoDisplay.texture = renderTexture;
+        }
+
+        videoPlayer.aspectRatio = VideoAspectRatio.FitInside;
+        videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+        videoPlayer.SetTargetAudioSource(0, audioSource); // Assign audio to source
+        videoPlayer.Prepare();
+
+        videoPlayer.prepareCompleted += (VideoPlayer vp) =>
+        {
+            audioSource.Play();  // Ensure audio plays when the video starts
+            videoPlayer.Play();
+        };
+
+        videoPlayer.loopPointReached += OnVideoFinished;
+
+        Camera.main.clearFlags = CameraClearFlags.SolidColor;
+        Camera.main.backgroundColor = Color.black;
+
         StartCoroutine(FadeIn());
     }
 
@@ -28,7 +57,7 @@ public class SplashScreenManager : MonoBehaviour
             fadeCanvasGroup.alpha = t / fadeDuration;
             yield return null;
         }
-        fadeCanvasGroup.alpha = 0; // Fully transparent
+        fadeCanvasGroup.alpha = 0;
     }
 
     void OnVideoFinished(VideoPlayer vp)
@@ -45,7 +74,7 @@ public class SplashScreenManager : MonoBehaviour
             fadeCanvasGroup.alpha = t / fadeDuration;
             yield return null;
         }
-        fadeCanvasGroup.alpha = 1; // Fully opaque
+        fadeCanvasGroup.alpha = 1;
         SceneManager.LoadScene(sceneName);
     }
 }

@@ -130,8 +130,24 @@ MonoBehaviour:
     m_Name: Player Controls
     m_Id: 7a076f02-26cd-4648-b540-812092acdd0a
     m_Asset: {fileID: 0}
-    m_Actions: []
-    m_Bindings: []
+    m_Actions:
+    - m_Name: New action
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: cc239554-bcbd-43cc-a26d-6c2ec4373a1c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: a6939ad2-571a-412f-a8a7-b6064675cf2f
+      m_Path: 
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: New action
+      m_Flags: 0
 --- !u!1 &25526494602306381
 GameObject:
   m_ObjectHideFlags: 0
