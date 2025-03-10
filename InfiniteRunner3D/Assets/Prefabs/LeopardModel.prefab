@@ -122,16 +122,117 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be3ccb26cbbb0d41bafaec4537a2822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   speed: 15
   turnSpeed: 5
   jumpForce: 10
   laneDistance: 3
+=======
+  speed: 4
+  turnSpeed: 5
+  jumpForce: 10
+  moveSpeed: 4
+  pathWidth: 4
+>>>>>>> Stashed changes
   playerControls:
     m_Name: Player Controls
     m_Id: 7a076f02-26cd-4648-b540-812092acdd0a
     m_Asset: {fileID: 0}
+<<<<<<< Updated upstream
     m_Actions: []
     m_Bindings: []
+=======
+    m_Actions:
+    - m_Name: Jump
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 97f98239-d6ec-40e7-9f01-7e42d053d3be
+      m_Processors: 
+      m_Interactions: Press
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Slide
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: cdda0b79-40e8-4568-80dd-c9b0770fe7a8
+      m_Processors: 
+      m_Interactions: Press
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Shift Horizontally
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: eb3d6a4e-f810-4a3a-8852-aa2e6d06d664
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: aad10161-2ffa-49f0-843f-308a01fdd634
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
+    - m_Name: 
+      m_Id: abf34a1a-a9b8-4a99-9a70-88e96ed41f4d
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Slide
+      m_Flags: 0
+    - m_Name: 1D Axis
+      m_Id: 7ee38880-1db7-4f64-8119-777b1170aa21
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shift Horizontally
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 096aacc1-68d5-455c-8cf3-8193a43cfb99
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shift Horizontally
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: d319105a-6de7-47d6-852f-5579af84a1eb
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shift Horizontally
+      m_Flags: 8
+    - m_Name: 1D Axis
+      m_Id: 2282be5b-b83c-44e6-90c4-1b43a25d19ed
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shift Horizontally
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 5e5ded12-a2bd-49ad-8026-12660a5c93fd
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shift Horizontally
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: e8355a76-e8c1-4af0-a6d5-c5e354f42e2e
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shift Horizontally
+      m_Flags: 8
+>>>>>>> Stashed changes
 --- !u!1 &25526494602306381
 GameObject:
   m_ObjectHideFlags: 0
