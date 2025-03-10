@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class PathManager : MonoBehaviour
 {
     [Header("Path Settings")]
     public GameObject[] pathPrefabs;
-    public GameObject flatIcePathPrefab; // ✅ FlatIcePath prefab for safe start
+    public GameObject flatIcePathPrefab; // FlatIcePath prefab for safe start
     public GameObject[] leftWallPrefabs;
     public GameObject[] rightWallPrefabs;
     public GameObject[] obstaclePrefabs;
@@ -13,11 +14,18 @@ public class PathManager : MonoBehaviour
     public int initialSegments = 5;
     public float pathLength = 18f;
     public float wallXOffset = 12f;
-    
+
+    public GameObject blueCrystalsPrefab;
+    private bool canSpawnBlueCrystals = false; // Prevent early spawning so player can move around
+
     private Transform player;
     private List<GameObject> activePaths = new List<GameObject>();
     private float lastPathEndZ = 0f;
-    private int pathsSpawned = 0; // ✅ Track how many paths are spawned
+    private int pathsSpawned = 10; // Track how many paths are spawned
+
+    [Header("Collectibles")]
+    public GameObject gemPrefab; //  Reference to the Gem Prefab
+    public int gemsPerRow = 10; // Number of gems per spawn row
 
     void Start()
     {
@@ -32,7 +40,16 @@ public class PathManager : MonoBehaviour
         {
             SpawnPath();
         }
+
+        // ✅ Start the delay timer for BlueCrystals spawning
+        StartCoroutine(EnableBlueCrystalsSpawn());
     }
+    IEnumerator EnableBlueCrystalsSpawn()
+    {
+        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        canSpawnBlueCrystals = true; // Allow spawning after delay
+    }
+
 
     void Update()
     {
@@ -49,7 +66,7 @@ public class PathManager : MonoBehaviour
     {
         GameObject newPath;
 
-        // ✅ Ensure first 10 paths are always FlatIcePath
+        // Ensure first 10 paths are always FlatIcePath
         if (pathsSpawned < 10)
         {
             newPath = Instantiate(flatIcePathPrefab, new Vector3(0, 0, lastPathEndZ), Quaternion.identity);
@@ -62,15 +79,15 @@ public class PathManager : MonoBehaviour
 
         newPath.tag = "PathTrigger";
         activePaths.Add(newPath);
-        pathsSpawned++; // ✅ Increment path count
+        pathsSpawned++; // Increment path count
 
-        // ✅ Ensure Crystal Caverns Floor is at Y = 0.83
+        //  Ensure Crystal Caverns Floor is at Y = 0.83
         if (newPath.name.Contains("Crystal Caverns Floor"))
         {
             newPath.transform.position = new Vector3(0, 0.83f, lastPathEndZ);
         }
 
-        // ✅ Spawn left wall
+        //  Spawn left wall
         if (leftWallPrefabs.Length > 0)
         {
             int leftIndex = Random.Range(0, leftWallPrefabs.Length);
@@ -79,7 +96,7 @@ public class PathManager : MonoBehaviour
             RepositionIfColliding(leftWall);
         }
 
-        // ✅ Spawn right wall
+        //  Spawn right wall
         if (rightWallPrefabs.Length > 0)
         {
             int rightIndex = Random.Range(0, rightWallPrefabs.Length);
@@ -88,19 +105,40 @@ public class PathManager : MonoBehaviour
             RepositionIfColliding(rightWall);
         }
 
-        // ✅ Spawn obstacles randomly (40% chance)
+        //  Spawn obstacles randomly (40% chance)
         if (obstaclePrefabs.Length > 0 && Random.Range(0, 100) < 40)
         {
             int obstacleIndex = Random.Range(0, obstaclePrefabs.Length);
             GameObject obstacle = Instantiate(obstaclePrefabs[obstacleIndex], new Vector3(Random.Range(-1f, 1f), 0, lastPathEndZ + Random.Range(1f, pathLength - 1f)), Quaternion.identity);
 
-            // ✅ Ensure Ice Archway is at Y = 4.4
+            //  Ensure Ice Archway is at Y = 4.4
             if (obstacle.name.Contains("Ice Archway"))
             {
                 obstacle.transform.position = new Vector3(obstacle.transform.position.x, 4.4f, obstacle.transform.position.z);
             }
 
             activePaths.Add(obstacle);
+        }
+        // Ensure BlueCrystals always spawns at Y = 1, but only after 5 seconds
+        if (canSpawnBlueCrystals && blueCrystalsPrefab != null)
+        {
+            Vector3 crystalPosition = new Vector3(Random.Range(-1f, 1f), 1f, lastPathEndZ + Random.Range(1f, pathLength - 1f));
+            GameObject crystal = Instantiate(blueCrystalsPrefab, crystalPosition, Quaternion.identity);
+            activePaths.Add(crystal);
+        }
+
+        //  Ensure Gems spawn at Y = 2.5, with random X positions between -18 and +8
+        if (gemPrefab != null)
+        {
+            for (int i = 0; i < gemsPerRow; i++)
+            {
+                float gemX = Random.Range(-18f, 8f); // Random X position
+                float gemZ = lastPathEndZ + Random.Range(1f, pathLength - 1f); // Slightly ahead
+                Vector3 gemPosition = new Vector3(gemX, 2.5f, gemZ);
+
+                GameObject gem = Instantiate(gemPrefab, gemPosition, Quaternion.identity);
+                activePaths.Add(gem);
+            }
         }
 
         lastPathEndZ += pathLength;

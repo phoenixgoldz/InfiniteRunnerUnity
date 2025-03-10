@@ -123,15 +123,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  turnSpeed: 5
   jumpForce: 10
-  laneDistance: 3
+  moveSpeed: 5
+  minX: -6.5
+  maxX: 7.5
   playerControls:
     m_Name: Player Controls
     m_Id: 7a076f02-26cd-4648-b540-812092acdd0a
     m_Asset: {fileID: 0}
     m_Actions:
-    - m_Name: New action
+    - m_Name: Move
       m_Type: 1
       m_ExpectedControlType: Button
       m_Id: cc239554-bcbd-43cc-a26d-6c2ec4373a1c
@@ -139,14 +140,86 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+    - m_Name: Jump
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 3e5ac8f2-fff8-428a-9358-9ddc698411c6
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Slide
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 557341a0-7298-4954-b7ba-4f13a31abe09
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Swipe
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 5d0ab987-1a1a-4d63-95e0-644671ca9246
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
     m_Bindings:
-    - m_Name: 
-      m_Id: a6939ad2-571a-412f-a8a7-b6064675cf2f
-      m_Path: 
+    - m_Name: 1D Axis
+      m_Id: 5fa1a0d6-495f-4407-b39e-f72da2dbc11f
+      m_Path: 1DAxis
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: New action
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: e4307f56-f2f9-420a-8900-a07258e88a33
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 1bd9f18d-d567-4ea1-8658-064136029d2a
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: 
+      m_Id: c900c787-e8db-4a7d-98a4-41fc4413cf23
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
+    - m_Name: 
+      m_Id: d60c8806-dca8-4f4a-8854-8b3f53e17bc6
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Slide
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 50cb6657-6fe1-4246-a9e8-91738dcaedba
+      m_Path: '<Touchscreen>/delta '
+      m_Interactions: 
+      m_Processors: Normalize
+      m_Groups: 
+      m_Action: Swipe
+      m_Flags: 0
+    - m_Name: 
+      m_Id: e38a8099-4876-435a-9c66-d88634e162ad
+      m_Path: '<Touchscreen>/delta '
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Swipe
       m_Flags: 0
 --- !u!1 &25526494602306381
 GameObject:

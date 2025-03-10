@@ -13,12 +13,14 @@ public class PlayerUIManager : MonoBehaviour
     public Button resumeButton;
     public Button quitButton;
 
+    private int lastCheckedDistance = -1; // To prevent multiple updates per frame
     private int score = 0;
     private float distanceTraveled = 0f;
     private bool isPaused = false;
     private AudioSource backgroundMusic;
     private GameObject player;
     private CharacterController characterController;
+    private float playerStartZ;
 
     public static PlayerUIManager Instance { get; private set; }
 
@@ -41,7 +43,7 @@ public class PlayerUIManager : MonoBehaviour
         pauseButton.onClick.AddListener(TogglePauseMenu);
         resumeButton.onClick.AddListener(TogglePauseMenu);
         quitButton.onClick.AddListener(QuitGame);
-
+        playerStartZ = GameObject.FindGameObjectWithTag("Player").transform.position.z;
         backgroundMusic = Object.FindFirstObjectByType<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -55,10 +57,19 @@ public class PlayerUIManager : MonoBehaviour
     {
         if (!isPaused && characterController != null && characterController.velocity.magnitude > 0.1f)
         {
+            // Track distance using velocity
             distanceTraveled += Time.deltaTime * characterController.velocity.magnitude;
             UpdateDistance(distanceTraveled);
+
+            // Increase score every 2 distance
+            if (Mathf.FloorToInt(distanceTraveled) % 2 == 0 && Mathf.FloorToInt(distanceTraveled) != lastCheckedDistance)
+            {
+                lastCheckedDistance = Mathf.FloorToInt(distanceTraveled);
+                UpdateScore(10); // Increase score by 10
+            }
         }
     }
+
 
     public int GetScore()
     {
@@ -72,17 +83,19 @@ public class PlayerUIManager : MonoBehaviour
 
     public void UpdateScore(int amount)
     {
-        if (characterController != null && characterController.velocity.magnitude > 0.1f)
-        {
-            score += amount;
-            scoreText.text = "Score: " + score;
-        }
+        score += amount; //  Add points
+        scoreText.text = " " + score; //  Update UI
     }
 
-    public void UpdateDistance(float distance)
+
+
+    public void UpdateDistance(float playerZ)
     {
+        float distance = playerZ - playerStartZ;
         distanceText.text = Mathf.FloorToInt(distance) + "m";
     }
+
+
 
     public void TogglePauseMenu()
     {
