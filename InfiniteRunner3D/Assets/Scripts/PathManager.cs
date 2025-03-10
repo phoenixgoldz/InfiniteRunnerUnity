@@ -105,6 +105,10 @@ public class PathManager : MonoBehaviour
         {
             int leftIndex = Random.Range(0, leftWallPrefabs.Length);
             GameObject leftWall = Instantiate(leftWallPrefabs[leftIndex], new Vector3(-wallXOffset, 7.64f, lastPathEndZ), Quaternion.Euler(0, 90, 0));
+            if (leftWall.name.Contains("CavernWall"))
+            {
+                leftWall.transform.position = new Vector3(leftWall.transform.position.x, leftWall.transform.position.y - 3.25f, leftWall.transform.position.z);
+            }
             activePaths.Add(leftWall);
             RepositionIfColliding(leftWall);
         }
@@ -114,6 +118,10 @@ public class PathManager : MonoBehaviour
         {
             int rightIndex = Random.Range(0, rightWallPrefabs.Length);
             GameObject rightWall = Instantiate(rightWallPrefabs[rightIndex], new Vector3(wallXOffset, 7.64f, lastPathEndZ), Quaternion.Euler(0, 90, 0));
+            if (rightWall.name.Contains("CavernWall"))
+            {
+                rightWall.transform.position = new Vector3(rightWall.transform.position.x, rightWall.transform.position.y - 3.25f, rightWall.transform.position.z);
+            }
             activePaths.Add(rightWall);
             RepositionIfColliding(rightWall);
         }
@@ -122,7 +130,7 @@ public class PathManager : MonoBehaviour
         if (obstaclePrefabs.Length > 0 && Random.Range(0, 100) < 40)
         {
             int obstacleIndex = Random.Range(0, obstaclePrefabs.Length);
-            GameObject obstacle = Instantiate(obstaclePrefabs[obstacleIndex], new Vector3(Random.Range(-1f, 1f), 0, lastPathEndZ + Random.Range(1f, pathLength - 1f)), Quaternion.identity);
+            GameObject obstacle = Instantiate(obstaclePrefabs[obstacleIndex], new Vector3(Random.Range(-1f, 1f), 1, lastPathEndZ + Random.Range(1f, pathLength - 1f)), Quaternion.identity);
 
             // ✅ Ensure Ice Archway is placed correctly at Y = 4.4
             if (obstacle.name.Contains("Ice Archway"))
@@ -153,7 +161,7 @@ public class PathManager : MonoBehaviour
         {
             for (int i = 0; i < gemsPerRow; i++)
             {
-                float gemX = Random.Range(-18f, 8f); // Random X position
+                float gemX = Random.Range(-5f, 5f); // Random X position
                 float gemZ = lastPathEndZ + Random.Range(1f, pathLength - 1f); // Slightly ahead
                 Vector3 gemPosition = new Vector3(gemX, 2.5f, gemZ);
 

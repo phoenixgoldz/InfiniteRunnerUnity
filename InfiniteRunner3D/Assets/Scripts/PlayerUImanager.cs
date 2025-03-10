@@ -55,10 +55,11 @@ public class PlayerUIManager : MonoBehaviour
 
     void Update()
     {
-        if (!isPaused && characterController != null && characterController.velocity.magnitude > 0.1f)
+        if (!isPaused/* && characterController != null && characterController.velocity.magnitude > 0.1f*/)
         {
             // Track distance using velocity
-            distanceTraveled += Time.deltaTime * characterController.velocity.magnitude;
+            //distanceTraveled += Time.deltaTime * characterController.velocity.magnitude;
+            distanceTraveled = (player.transform.position.z - playerStartZ) / 5;
             UpdateDistance(distanceTraveled);
 
             // Increase score every 2 distance

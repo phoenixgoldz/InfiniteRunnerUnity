@@ -35,10 +35,10 @@ public class PlayerController : MonoBehaviour
 
         lanePosition = transform.position;
 
-        CreateKeyboardControls(); // Always initialize keyboard controls
 #if UNITY_ANDROID || UNITY_IOS
         AddMobileControls();
 #endif
+        CreateKeyboardControls(); // Always initialize keyboard controls
         playerControls.Enable();
 
     }
