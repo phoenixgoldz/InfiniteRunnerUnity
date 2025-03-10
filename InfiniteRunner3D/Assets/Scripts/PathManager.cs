@@ -41,12 +41,12 @@ public class PathManager : MonoBehaviour
             SpawnPath();
         }
 
-        // ✅ Start the delay timer for BlueCrystals spawning
+        // Start the delay timer for BlueCrystals spawning
         StartCoroutine(EnableBlueCrystalsSpawn());
     }
     IEnumerator EnableBlueCrystalsSpawn()
     {
-        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        yield return new WaitForSeconds(15f); // Wait for 15 seconds
         canSpawnBlueCrystals = true; // Allow spawning after delay
     }
 
@@ -66,8 +66,8 @@ public class PathManager : MonoBehaviour
     {
         GameObject newPath;
 
-        // Ensure first 10 paths are always FlatIcePath
-        if (pathsSpawned < 10)
+        // Ensure first 15 paths are always FlatIcePath for safe testing
+        if (pathsSpawned < 15)
         {
             newPath = Instantiate(flatIcePathPrefab, new Vector3(0, 0, lastPathEndZ), Quaternion.identity);
         }
@@ -75,6 +75,19 @@ public class PathManager : MonoBehaviour
         {
             int floorIndex = Random.Range(0, pathPrefabs.Length);
             newPath = Instantiate(pathPrefabs[floorIndex], new Vector3(0, 0, lastPathEndZ), Quaternion.identity);
+        }
+        if (pathsSpawned >= 15 && obstaclePrefabs.Length > 0 && Random.Range(0, 100) < 40)
+        {
+            int obstacleIndex = Random.Range(0, obstaclePrefabs.Length);
+            Vector3 obstaclePosition = new Vector3(
+                Random.Range(-1f, 1f), // Random X position
+                1.0f, // Fixed Y-axis spawn at 1.0f
+                lastPathEndZ + Random.Range(1f, pathLength - 1f) // Random Z position ahead
+            );
+
+            GameObject obstacle = Instantiate(obstaclePrefabs[obstacleIndex], obstaclePosition, Quaternion.identity);
+
+            activePaths.Add(obstacle);
         }
 
         newPath.tag = "PathTrigger";
@@ -111,7 +124,7 @@ public class PathManager : MonoBehaviour
             int obstacleIndex = Random.Range(0, obstaclePrefabs.Length);
             GameObject obstacle = Instantiate(obstaclePrefabs[obstacleIndex], new Vector3(Random.Range(-1f, 1f), 0, lastPathEndZ + Random.Range(1f, pathLength - 1f)), Quaternion.identity);
 
-            //  Ensure Ice Archway is at Y = 4.4
+            // ✅ Ensure Ice Archway is placed correctly at Y = 4.4
             if (obstacle.name.Contains("Ice Archway"))
             {
                 obstacle.transform.position = new Vector3(obstacle.transform.position.x, 4.4f, obstacle.transform.position.z);
@@ -119,12 +132,20 @@ public class PathManager : MonoBehaviour
 
             activePaths.Add(obstacle);
         }
-        // Ensure BlueCrystals always spawns at Y = 1, but only after 5 seconds
         if (canSpawnBlueCrystals && blueCrystalsPrefab != null)
         {
-            Vector3 crystalPosition = new Vector3(Random.Range(-1f, 1f), 1f, lastPathEndZ + Random.Range(1f, pathLength - 1f));
+            // Ensure the BlueCrystals spawn with a fixed Y-axis at 3.0f
+            Vector3 crystalPosition = new Vector3(
+                Random.Range(-1f, 3f), // Random X position
+                3.0f, // Fixed Y-axis spawn
+                lastPathEndZ + Random.Range(1f, pathLength - 1f) // Random Z position ahead
+            );
+
+            // ✅ Instantiate and add to activePaths
             GameObject crystal = Instantiate(blueCrystalsPrefab, crystalPosition, Quaternion.identity);
             activePaths.Add(crystal);
+
+            Debug.Log($"💎 Blue Crystal spawned at {crystalPosition}");
         }
 
         //  Ensure Gems spawn at Y = 2.5, with random X positions between -18 and +8
@@ -143,33 +164,39 @@ public class PathManager : MonoBehaviour
 
         lastPathEndZ += pathLength;
     }
-
     void RepositionIfColliding(GameObject wall)
     {
-        int maxAttempts = 5; // ✅ Prevent infinite loop
+        int maxAttempts = 2; // Prevent infinite loop
         int attempts = 0;
+        bool repositioned = false;
 
         while (attempts < maxAttempts)
         {
-            Collider[] colliders = Physics.OverlapSphere(wall.transform.position, 5f);
-            bool collisionDetected = false;
+            Collider[] colliders = Physics.OverlapSphere(wall.transform.position, 2f);
+            repositioned = false;
 
             foreach (Collider col in colliders)
             {
                 if (col.gameObject != wall && col.CompareTag("Wall"))
                 {
                     Debug.Log("⚠️ Wall Collision Detected! Repositioning...");
-                    wall.transform.position += new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
-                    collisionDetected = true;
+
+                    wall.transform.position += new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
+                    repositioned = true;
                     break;
                 }
             }
 
-            if (!collisionDetected) break; // ✅ Stop repositioning if no collision
+            if (!repositioned) break;
             attempts++;
         }
-    }
 
+        if (attempts == maxAttempts)
+        {
+            Debug.LogWarning("🚨 Failed to reposition wall, destroying & respawning!");
+            Destroy(wall);
+        }
+    }
 
     void DeleteOldPath()
     {

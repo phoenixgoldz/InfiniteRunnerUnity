@@ -213,14 +213,6 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Swipe
       m_Flags: 0
-    - m_Name: 
-      m_Id: e38a8099-4876-435a-9c66-d88634e162ad
-      m_Path: '<Touchscreen>/delta '
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Swipe
-      m_Flags: 0
 --- !u!1 &25526494602306381
 GameObject:
   m_ObjectHideFlags: 0

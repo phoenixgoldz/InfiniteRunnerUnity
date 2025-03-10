@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector3 lanePosition;
     private bool isMoving = false;
+    private bool isFalling = false;
 
     public float speed = 10f;
     public float jumpForce = 10f;
@@ -34,13 +35,12 @@ public class PlayerController : MonoBehaviour
 
         lanePosition = transform.position;
 
+        CreateKeyboardControls(); // Always initialize keyboard controls
 #if UNITY_ANDROID || UNITY_IOS
         AddMobileControls();
-#else
-        CreateKeyboardControls();
 #endif
-
         playerControls.Enable();
+
     }
 
     void OnDestroy()
@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
 #endif
         playerControls.Disable();
     }
-
     void FixedUpdate()
     {
         if (isMoving)
@@ -61,9 +60,23 @@ public class PlayerController : MonoBehaviour
             MovePlayer();
         }
 
+        // ✅ Detect when player is in the air (falling)
+        if (rb.linearVelocity.y < -0.1f && !IsGrounded()) // Falling downwards
+        {
+            isFalling = true;
+            animator.SetBool("IsFalling", true);
+        }
+
+        // ✅ Detect when player lands
+        if (transform.position.y <= 0.4024749f && isFalling)
+        {
+            isFalling = false;
+            animator.SetBool("IsFalling", false);
+            animator.SetBool("IsJumping", false); // Ensure jumping resets too
+        }
+
         if (transform.position.y < -5f) Die();
     }
-
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("PathTrigger"))
@@ -76,46 +89,116 @@ public class PlayerController : MonoBehaviour
             Debug.Log("❌ Hit an Obstacle!");
             Die();
         }
-    }
 
+        // ✅ Detect landing from a jump
+        if (collision.gameObject.CompareTag("PathTrigger"))
+        {
+            Debug.Log("🏁 Landed! Resetting Falling & Running.");
+            isJumping = false;
+            isFalling = false; // Immediately reset falling state
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsFalling", false);
+            animator.SetBool("IsRunning", true);
+        }
+    }
     void Jump()
     {
         if (IsGrounded() && !isJumping)
         {
             isJumping = true;
+            isFalling = false;
+            animator.SetBool("IsJumping", true);
+            animator.SetBool("IsFalling", false);
+            animator.SetBool("IsRunning", false);
+
+            Debug.Log("🔵 Jump triggered, isJumping = true");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            animator.SetBool("isJumping", true);
 
-            Debug.Log("Jumping!");
-
-            // Reset jump after landing
-            Invoke(nameof(ResetJump), 0.5f);
+            // ✅ Invoke ResetJump faster
+            Invoke(nameof(ResetJump), 0.3f);
         }
     }
 
     void ResetJump()
     {
         isJumping = false;
-        animator.SetBool("isJumping", false);
-    }
+        animator.SetBool("IsJumping", false);
 
+        // ✅ Check if player is still in air to transition to falling
+        if (!IsGrounded())
+        {
+            animator.SetBool("IsFalling", true);
+        }
+    }
     private void CreateKeyboardControls()
     {
-        playerControls = new InputActionMap("Player Controls");
+        if (playerControls == null)
+        {
+            playerControls = new InputActionMap("Player Controls");
+            Debug.Log("🟢 Keyboard controls initialized.");
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ Keyboard controls already exist. Skipping duplicate initialization.");
+            return;
+        }
 
-        moveAction = playerControls.AddAction("Move", binding: "<Keyboard>/leftArrow" + " | <Keyboard>/rightArrow");
-        moveAction.performed += context => MoveHorizontally(context.ReadValue<float>());
+        // ✅ Move Action (Check if it exists before adding)
+        if (playerControls.FindAction("Move") == null)
+        {
+            moveAction = playerControls.AddAction("Move", binding: "<Keyboard>/a | <Keyboard>/d | <Keyboard>/leftArrow | <Keyboard>/rightArrow");
+            moveAction.performed += context =>
+            {
+                float input = context.ReadValue<float>();
+                Debug.Log($"🎮 Keyboard Move Input: {input}");
+                MoveHorizontally(input);
+            };
 
-        jumpAction = playerControls.AddAction("Jump", binding: "<Keyboard>/space", interactions: "press");
-        jumpAction.performed += _ => Jump(); // Ensure this is triggered correctly
+            moveAction.canceled += _ =>
+            {
+                Debug.Log("🎮 Keyboard Released: Stopping Movement");
+            };
+        }
 
-        slideAction = playerControls.AddAction("Slide", binding: "<Keyboard>/downArrow", interactions: "press");
-        slideAction.performed += _ => Slide();
+        // ✅ Jump Action (Check if it exists before adding)
+        if (playerControls.FindAction("Jump") == null)
+        {
+            jumpAction = playerControls.AddAction("Jump", binding: "<Keyboard>/space", interactions: "press");
+            jumpAction.performed += _ =>
+            {
+                Debug.Log("🎮 Spacebar Pressed: Jump!");
+                Jump();
+            };
+        }
 
-        playerControls.Enable(); // Enable controls
+        // ✅ Slide Action (Check if it exists before adding)
+        if (playerControls.FindAction("Slide") == null)
+        {
+            slideAction = playerControls.AddAction("Slide", binding: "<Keyboard>/s | <Keyboard>/downArrow", interactions: "press");
+            slideAction.performed += _ =>
+            {
+                Debug.Log("🎮 Down Key Pressed: Slide!");
+                Slide();
+            };
+        }
+
+        // ✅ Tilt Emulation via Arrow Keys (Check if it exists before adding)
+        if (playerControls.FindAction("Tilt") == null)
+        {
+            tiltAction = playerControls.AddAction("Tilt", binding: "<Keyboard>/leftArrow | <Keyboard>/rightArrow");
+            tiltAction.performed += context =>
+            {
+                float tiltInput = context.ReadValue<float>();
+                Debug.Log($"🎮 Keyboard Tilt Input: {tiltInput}");
+                MoveHorizontally(tiltInput);
+            };
+        }
+
+        playerControls.Enable();
     }
 
 
+    /// ✅ **Fix: Add Mobile Controls**
     private void AddMobileControls()
     {
         if (playerControls.FindAction("Swipe") == null)
@@ -132,8 +215,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    void HandleSwipe(Vector2 swipeDirection)
+    /// ✅ **Fix: Add Swipe Handling**
+    private void HandleSwipe(Vector2 swipeDirection)
     {
         Debug.Log($"Swipe Detected: {swipeDirection}");
 
@@ -158,9 +241,7 @@ public class PlayerController : MonoBehaviour
             MoveHorizontally(-1);
         }
     }
-
-
-    void DetectTilt()
+    private void DetectTilt()
     {
         if (tiltAction == null)
         {
@@ -168,28 +249,49 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        float tilt = tiltAction.ReadValue<float>();
-        if (tilt > 0.2f) MoveHorizontally(1);
-        if (tilt < -0.2f) MoveHorizontally(-1);
-    }
+        Vector3 tiltInput = tiltAction.ReadValue<Vector3>(); // Read full acceleration
+        float tiltValue = tiltInput.x; // Get the X-axis tilt
 
+        if (Mathf.Abs(tiltValue) > 0.2f) //  Apply dead zone to avoid jitter
+        {
+            MoveHorizontally(tiltValue);
+        }
+    }
 
     void MovePlayer()
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, speed);
     }
-
-
     void MoveHorizontally(float direction)
     {
         if (direction == 0) return;
 
         float newX = transform.position.x + (direction * moveSpeed * Time.deltaTime);
-        newX = Mathf.Clamp(newX, minX, maxX);
+        newX = Mathf.Clamp(newX, minX, maxX); // ✅ Prevent moving off screen
 
         transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+        Debug.Log($"🚶 Moving {direction}: New X Position = {newX}");
 
-        Debug.Log($"Moving {direction}: New X Position = {newX}");
+        // ✅ Adjust animations for left/right movement
+        if (direction > 0)
+        {
+            animator.SetBool("IsTurningRight", true);
+            animator.SetBool("IsTurningLeft", false);
+        }
+        else if (direction < 0)
+        {
+            animator.SetBool("IsTurningRight", false);
+            animator.SetBool("IsTurningLeft", true);
+        }
+
+        Invoke(nameof(ResetTurnAnimations), 0.3f);
+    }
+ 
+
+    void ResetTurnAnimations()
+    {
+        animator.SetBool("IsTurningRight", false);
+        animator.SetBool("IsTurningLeft", false);
     }
 
     void Slide()
@@ -197,7 +299,7 @@ public class PlayerController : MonoBehaviour
         if (!isSliding)
         {
             isSliding = true;
-            animator.SetTrigger("isSliding");
+            animator.SetTrigger("IsSliding");
             Invoke(nameof(StopSliding), 1f);
         }
     }
@@ -209,10 +311,10 @@ public class PlayerController : MonoBehaviour
         Debug.Log("❌ Player died! Saving score & transitioning to leaderboard...");
         SceneManager.LoadScene("MainMenu");
     }
-
     bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 1f);
+        // ✅ Raycast downwards to detect ground
+        return Physics.Raycast(transform.position, Vector3.down, 0.6f);
     }
 
 }
